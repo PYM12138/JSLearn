@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS对象</title>
+    <script>
+        /*
+        * 总共分三种对象:
+        *   1.自建对象。String\Number这些
+        *   2.宿主对象。BOM DOM 由浏览器提供的
+        *   3.自定义对象。自己创建的
+        * */
+
+        //创建一个新对象
+        var obj=new Object();
+
+        //添加属性并赋值
+        obj.name="swk";
+        obj.age=18;
+
+        //删除属性
+        delete obj.name;
+
+        //console.log(obj.name);
+
+
+
+        //另一种创建属性的方式
+        /*
+        * 语法:对象["属性名"]=属性值
+        * */
+
+        obj["123"]=456;
+        console.log(obj["123"]);
+
+        //还可以是变量,这样就有了极大的灵活性
+        obj["niHao"]="你好";
+        var n="niHao";
+
+        console.log(obj[n]);
+
+        /*
+        * 属性值可以是任意的类型
+        * 如果是对象的类型，则可以调用里面的数据
+        * */
+
+        var obj2=new Object();
+
+        obj2.test=obj;
+        console.log("通过Obj2去调用obj的数据:"+obj2.test.niHao);
+
+
+        //既可以是一个对象的属性去赋值为对象，也可以一个变量去接收对象
+        var obj3=obj;
+        console.log(obj3.niHao);
+
+
+        //如果不知道里面是否有对应的属性，可以用in运算符
+        //语法: "属性名" in 对象
+        console.log("test" in obj2);
+
+        /*
+        * 对象的字面量：就是new Object() 用{} 来代替
+        *  然后里面可以直接用键值对的方式来赋值了,还可以嵌套对象,在最后一个属性值后面不需要加逗号了
+        * */
+        var obj4={
+            id:1,
+            name:"张三",
+            test:{name:"李四"}
+        };
+        console.log(obj4)
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
