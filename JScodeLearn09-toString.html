@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>toString方法重写</title>
+    <script>
+        function Person(name,age,gender) {
+            this.name=name;
+            this.age=age;
+            this.gender=gender;
+        }
+        //JS没有重写的概念，所以称为修改
+        Person.prototype.toString=function () {
+            return "名字是"+this.name+",年龄是"+this.age+",性别是"+this.gender
+        }
+
+
+        var person = new Person("宿五克",18,"男");
+        var person1 = new Person("住百家",19,"男");
+
+        console.log(person)
+        document.write(person)
+
+
+    </script>
+
+</head>
+<body>
+
+</body>
+</html>

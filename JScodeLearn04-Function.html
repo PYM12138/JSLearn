@@ -52,12 +52,43 @@
         fun4()();
 
         //立即执行函数
-        (function () {
+       /* (function () {
             alert("这是一个立即执行函数，也是一个匿名函数");
         })();
         (function (a) {
             alert("这是一个立即执行函数，也是一个匿名函数,还可以传参哟~"+a);
-        })("123");
+        })("123");*/
+
+        /*
+        * 函数中的方法
+        *  call() 和 apply()
+        * call可以传入对象使对应的函数的this改变，后面可以在传值给形参
+        * apply也可以传入对象改变this，传值只能传数组
+        * */
+        function methodFun(a, b) {
+            console.log(this)
+        }
+        var objFun={name:"张桑"}
+        methodFun.call(objFun,1,2);
+        methodFun.apply(objFun,[1,2]);
+
+        /*
+                * 函数中有两个隐含参数：
+                *   1.函数的上下文对象:this
+                *   2.实参的对象:arguments
+                * 0.是一个类数组对象，所有实参都会在这里保存
+                * 1.arguments只和实参有关，和形参无关
+                * 2.可以通过它来获取实参值、长度
+                * 3.arguments.callee属性代表当前所在的函数对象
+                *
+                * */
+
+        function f() {
+            console.log(arguments[0])
+            console.log(arguments.length)
+            console.log(arguments.callee)
+        }
+        f(1,2,3);
 
 
 

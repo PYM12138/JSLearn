@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数组</title>
+<script>
+    //数组本算也是一个对象，对象能做的事情比如定义属性、函数，它也可以。不过没有意义。
+
+    var array = new Array();
+    //数组.length，这个length是属性不是方法，并且是可以自己修改值的。索引从0开始。数据不足则会填充空元素
+    //length返回值永远都比最后一个索引+1，所以array[array.length] 永远是最后一位
+    array[0]=1;
+    array.length=10;
+    console.log(array)
+
+    //数组字面量,可以直接添加元素
+    //数组元素可以是任意数据类型
+    var array1=[1,2,3,4,5];
+
+
+    /*常用的四个数组方法
+    * push():在数组最后一位添加一个或多个元素，并返回新的数组长度
+    * unshift()：在数组的第一位添加一个或多个元素，并返回新的数组长度
+    * pop()：删除最后一位数组元素，并返回删除的元素值
+    * shift()：删除第一位数组元素，并返回删除的元素值
+    * */
+
+    //foreach() 方法 ，第一次接触回调函数
+    //回调函数：由浏览器去调用的函数，会自动传参到函数中，只需要写明形参并使用即可
+    /*
+    * foreach()有三个形参：
+    *   第一个是value值，也就是元素值
+    *   第二个是数组索引
+    *   第三个是数组对象
+    * */
+    array1.forEach(function (value, index, array) {
+        console.log(value)
+    })
+
+    /*
+    * 还有两个方法
+    * slice(开始索引，结束索引):截取数组并返回一个新数组，不改变原数组 左闭右开
+    * splice(开始索引,删除数量,添加新元素)：删除指定元素或者不删除元素插入新元素都行，修改原数组。返回被删除的元素
+    * */
+
+    var numbers = array1.slice(0,2);
+
+    var numbers1 = array1.splice(0,1,2);
+
+    //sort() 数组排序方法，可以自定义排序规则,加入回调函数
+
+    array1.sort(function (a, b) {
+        //正常升序规则
+       /* if (a<b){
+            return 1; //1 代表要交换位置
+        }else if (a>b){
+            return -1;//-1 代表不需要交换
+        }else{
+            return 0; // 0 代表位置不变
+        }*/
+
+        //简化升序版本
+        return a-b;
+        //降序
+       /* return b-a;*/
+
+
+    })
+
+
+
+
+</script>
+
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>原型对象</title>
+<script>
+
+  /*在每一个函数中都有一个隐藏的属性叫 prototype。
+  当函数以构造函数的方式来调用才会有用
+  相当于一个公共区域可以去创建属性或者创建函数
+  所有对象都能共享里面的属性和方法
+  对象名.prototype.属性名/函数
+  实例要调用则有__proto__属性来访问
+  *
+  *
+  函数Person（对象）有个属性prototype（指针）指向原型对象。 Person.prototype（原型对象，实质也是对象），
+  他有个属性constructor（指针） ，又指向 Person函数对象
+
+  实例对象person1有个属性[prototype]（内部属性，chrome和firefix，Safari，中这个属性叫_proto_）指向原型对象。
+  实例对象可以通过这个属性访问原型对象上的属性和方法（Perons.prototype._proto_ == person1._proto_）。
+
+
+  * */
+
+
+
+  function Fun1() {
+
+  }
+  Fun1.prototype.a=123;
+  var obj=new Fun1();
+  console.log(obj.a)
+
+  /*
+  * 原型对象也是对象，它里面也有原型对象。一般有两层结构。
+  * 原型对象找不到想要的属性则会去原型的原型对象找
+  * */
+  //hasOwnProperty() 找函数里面是否有对应的属性，不包括prototype
+  //in 查找的范围包括prototype
+  console.log(obj.__proto__.__proto__.hasOwnProperty("hasOwnProperty"));
+
+
+
+
+</script>
+
+
+</head>
+<body>
+
+</body>
+</html>
