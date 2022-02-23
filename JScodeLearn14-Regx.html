@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>正则表达式</title>
+    <script>
+
+        /*正则表达式基本语法:
+        *   1. a|b  表示a或b 出现一个就是true
+        *   2.[ab] 也表示a或b 出现一个就是true
+        *   3.[^0-9] 除了0-9的数字，160a99，只要不是全部是数字就是true
+        *   4.正则表达式还可以用于split(/[A-z]/) search(/a[bcd]c/) match(/[a-z]/ig) replace() 等一些方法中
+        *   5./正则表达式/匹配模式  i=忽略大小写模式  g=全局匹配模式(找出所有满足条件的) ig可以同时存在，且顺序无关
+        *   6.a{2} 表示a正好连续出现2次 (ab){2} 表示ab正好出现两次 a{0,2} 表示a出现0-2次
+        *   7. ^a 以a开头  a$ 以a结尾
+        * 8.匹配开头和结尾的空格 /^\s*|\s*$/g
+        * */
+
+        var reg=/[^0-9]/
+        console.log(reg.test("160a")) //true
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

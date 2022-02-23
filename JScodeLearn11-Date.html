@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>时间对象</title>
+<script>
+    //可以自己指定时间，也可以获取当前时间 根据电脑的时间来的
+    var date = new Date();
+
+    //月/日/年 时/分/秒
+    var date1 =new Date("2/22/2022 0:00:00")
+    console.log(date)
+    console.log(date1)
+
+    //获取时间戳：从格林威治 1970/1/1 0:00:00 到现在时间的毫秒值
+    var time = date.getTime();
+    console.log(time)
+
+    //获取当前的时间戳
+    var timeNow = Date.now();
+    console.log(timeNow)
+    
+
+
+
+</script>
+</head>
+<body>
+
+</body>
+</html>
