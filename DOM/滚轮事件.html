@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>鼠标滚轮</title>
+<style>
+    #box1{
+        width: 100px;
+        height: 100px;
+        background-color: red;
+    }
+
+</style>
+<script>
+   window.onload=function () {
+       var box1 = document.getElementById("box1");
+
+       //DOMMouseScroll。火狐17.0以前的版本，用addEventListener()去调用这个事件，
+       // 如果用了这个方法，那么关闭浏览器默认行为就不是用return false,而是用专门的方法 event.preventDefault()
+       //其它浏览器则用onMouseWheel这个事件，关闭默认行为用return false;
+
+       //不过目前来说，下面的这个方法通用全部浏览器
+       box1.onwheel=function (event) {
+           //event.deltaY 返回数值，正数代表向下滚，负数代表向上滚。
+           if (event.deltaY<0){
+               //alert("向上滚");
+               box1.style.height=box1.clientHeight-10+"px";
+           }else{
+              // alert("向下滚");
+               box1.style.height=box1.clientHeight+10+"px";
+           }
+           //取消浏览器滚轮默认滚动条行为
+            return false;
+       };
+
+
+
+
+   };
+
+
+</script>
+
+</head>
+<body style="height: 2000px">
+<div id="box1" ></div>
+</body>
+</html>

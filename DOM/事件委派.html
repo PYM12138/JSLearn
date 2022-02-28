@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件委派</title>
+<script>
+    /*
+    * 事件委派:
+    * 利用冒泡的特性来给父元素绑定一个事件，从而达到所有其子元素都绑定一样的事件。减少绑定次数，提高性能。
+    *
+    * */
+    window.onload=function () {
+
+        var btn = document.getElementById("btnLi");
+        var ul = document.getElementById("ul1");
+        btn.onclick=function () {
+            var li = document.createElement("li");
+            li.innerHTML+="<li><a href=\"javascript:;\" class=\"link\">超链接</a></li>";
+            ul.appendChild(li);
+        };
+
+
+        ul.onclick=function (event) {
+            //虽然绑定了父元素事件，但是这也导致了所有在父元素区域的点击都会触发事件
+            //所以需要根据点击的对应的标签才能触发内容
+            var liClass = document.getElementsByClassName("link");
+            if (event.target.className==="link"){
+                alert("我是超链接！");
+            }
+        };
+    };
+
+
+
+</script>
+
+
+
+</head>
+<body>
+<button id="btnLi">生成一个超链接</button>
+<ul id="ul1" style="background-color: #99ff99">
+    <p>这是p元素</p>
+    <li><a href="javascript:;" class="link">超链接一</a></li>
+    <li><a href="javascript:;" class="link">超链接一</a></li>
+    <li><a href="javascript:;" class="link">超链接一</a></li>
+
+</ul>
+</body>
+</html>

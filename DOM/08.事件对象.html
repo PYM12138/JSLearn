@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	#areaDiv {
+		border: 1px solid black;
+		width: 300px;
+		height: 50px;
+		margin-bottom: 10px;
+	}
+	#showMsg {
+		border: 1px solid black;
+		width: 300px;
+		height: 20px;
+	}
+</style>
+<script type="text/javascript">
+	window.onload=function () {
+		//通过鼠标移动来获取对应的坐标信息
+		var area = document.getElementById("areaDiv");
+		var showMsg = document.getElementById("showMsg");
+
+		//当事件触发时，浏览器会像回调函数传入一些实参，这些实参我们可以使用
+		area.onmousemove=function (event) {
+			//获取鼠标水平和垂直坐标
+			var clientX = event.clientX;
+			var clientY = event.clientY;
+
+			//把对应的值展示到showMsg
+			showMsg.innerHTML="x="+clientX+",y="+clientY;
+		}
+
+
+
+	}
+
+
+
+
+
+
+
+</script>
+
+</head>
+<body>
+
+	<div id="areaDiv"></div>
+	<div id="showMsg"></div>
+
+</body>
+</html>

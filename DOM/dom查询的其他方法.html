@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>dom</title>
+<script>
+
+window.onload=function () {
+    /*
+    * 获取body标签，有两种方式:
+    *     1.getElementsByTagName();
+    *     2.或者直接 document.body;
+    * */
+    var body = document.body;
+
+    /*
+    * document.documentElement; 获取html标签，同时也是获取整个元素文档
+    * */
+
+    var html = document.documentElement;
+
+    /*
+    *
+    * document.all 获取页面的全部元素
+    * */
+    var all = document.all;
+
+    /*
+    * document.querySelector()
+    * 根据css选择器来查询一个元素节点
+    *
+    * document.querySelectorAll()
+    *返回多个元素节点
+    *
+    * document.getElementsByClassName();
+    * 一样可以获取class属性，但是IE8不支持;
+    *
+    * */
+    //class为box1里面的第一个div元素
+    var element = document.querySelector(".box1 div");
+
+}
+
+
+
+</script>
+
+
+
+</head>
+<body style="align-content: baseline">
+<div class="box1">
+
+
+</div>
+
+</body>
+</html>

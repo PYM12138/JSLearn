@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM对象</title>
+<!--    <script>
+        最重要的一点的是：浏览器是从上往下执行的
+        /*如果js放在head里面，引用了某个dom，但是这时你还没加载dom tree，会报错，可以采用 window.onload = function(){}这样来解决，
+        或者给js设置defer 或者 async来让js异步加载，这样就不会报错了。(这两个设置只对引用的JS文件生效)*/
+
+        window.onload=function () {//这样也行，不过最好还是放在body标签内底部
+            var elementById = document.getElementById("btn");
+            elementById.innerHTML="我改名字了";
+        }
+    </script>-->
+
+
+</head>
+<body>
+<!--
+  事件：用户和浏览器交互的行为，浏览器做出的反应叫做事件
+  -->
+<button id="btn">按钮btn</button>
+<script>
+        var elementById = document.getElementById("btn");
+        elementById.innerHTML="我改名字了";
+        elementById.onclick=function () {
+            alert("你踩到我了");
+        };
+
+</script>
+
+
+</body>
+</html>

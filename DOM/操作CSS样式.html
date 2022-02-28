@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM操作CSS</title>
+<style>
+    #box1{
+        width: 100px;
+        height: 100px;
+        background-color: #99ff99;
+    }
+</style>
+<script>
+    window.onload=function () {
+        var btn = document.getElementById("btn");
+        btn.onclick=function () {
+           /* 获取css样式：
+           *    1.元素.style.样式名 (只能读取内联样式，没有就读取不到了)
+           *    2.赋值:元素.style.样式名=样式值;
+           *
+           * 通过JS的方式赋值，是直接给对应的标签设置内联css样式，从而达到覆盖的目的
+           * 如果加入了!important 则无法覆盖！
+           * */
+            var box1 = document.getElementById("box1");
+            box1.style.width="500px";
+            box1.style.height="500px";
+            box1.style.backgroundColor="red";
+
+
+            /*
+            * 获取当前正在显示的css样式
+            * getComputedStyle();  window的方法
+            * 需要两个参数：
+            * 一个是要获取的样式元素
+            * 另一个是伪元素，一般填写null;
+            * */
+            //返回一个css对象
+            var cssObj=getComputedStyle(box1,null);
+            alert(cssObj.width);
+
+            //判断滚动条到底的公式: css对象.scrollHeight-css对象.scrollTop==css对象.clientHeight
+
+
+
+
+
+        }
+    }
+
+
+</script>
+
+</head>
+<body>
+<button id="btn">点我改变形状</button>
+<div id="box1">
+
+</div>
+</body>
+</html>

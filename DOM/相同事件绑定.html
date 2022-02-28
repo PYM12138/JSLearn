@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<script>
+    /*
+    *要想对一个对象绑定多个事件，用对象.addEventListener()方法
+    * 注意：如果事件之间紧密联系，把事件全部写在一个触发事件中即可。
+    *addEventListener() 有三个参数:
+    *   1.事件字符串，不要On
+    *   2.一个回调函数
+    *   3.是否在捕获阶段触发事件，一般传false
+    * */
+    window.onload=function () {
+        var btn = document.getElementById("btn");
+        btn.addEventListener("click",function () {
+            alert("第一个警告框");
+
+
+        },false)
+        btn.addEventListener("click",function () {
+            alert("第二个警告框");
+        },false)
+    }
+
+
+
+</script>
+
+
+</head>
+<body>
+<button id="btn">点我！</button>
+</body>
+</html>

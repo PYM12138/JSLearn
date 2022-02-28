@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script>
+        /*
+        * 键盘事件只能绑定给有焦点的内容，比如Input输入框或者document对象
+        * 总共有两个方法:
+        *   - onKeyDown:当键盘被按下
+        *   - onKeyUp:当键盘被松开
+        * 还有属性：
+        *   keyCode 按下的键盘字母或者其它，会被转化成编码
+        *   altKey :alt键
+        *   shiftKey:shift键
+        *   ctrlKey: ctrl键
+        *
+        * */
+
+        window.onload = function () {
+            /*document.onkeydown = function (event) {
+                //当同一个键被长按时，浏览器会卡顿一下判断是否误操作，如果一直按着则开始重复当前按键事件
+
+                if (event.keyCode === 89 && event.ctrlKey) {
+                    console.log("ctrl键和Y键被同时按下");
+                }
+
+            }*/
+            //让Input框只能输入字母
+            var input = document.getElementsByTagName("input")[0];
+            input.onkeydown = function (event) {
+                console.log(event.keyCode)
+                //测试证明：小数字键盘和字母键盘上面的数字的编码不同
+                if (event.keyCode >= 48 && event.keyCode <= 57) {
+                    //这个是取消onkeydown的默认行为，不让输入了
+                    return false;
+                }
+
+            };
+
+
+            /* document.onkeyup=function () {
+                 console.log("键盘被松开")
+             }*/
+
+        }
+
+
+    </script>
+</head>
+<body>
+<input type="text">
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#box1{
+				width: 100px;
+				height: 100px;
+				background-color: red;
+				/*
+				 * 开启box1的绝对定位,不开启定位，直接设置不能移动
+				 */
+				position: absolute;
+			}
+			
+		</style>
+		<script>
+			window.onload=function () {
+				//让div跟着鼠标一起移动
+				var box1 = document.getElementById("box1");
+				document.onmousemove=function (event) {
+					//解决兼容问题（其实两者都是一样的，只是浏览器有些不支持）
+					event = event || window.event;
+
+					//出现一个问题：div只能往下移，不能往上移。原因是坐标问题
+					//解决方式一:
+					//这个是拿到鼠标相对于当前显示页面的坐标位置
+					//client 是相对于整个文档的页面坐标
+				/*	var pageX = event.pageX;
+					var pageY = event.pageY;
+					box1.style.left=pageX +"px";
+					box1.style.top=pageY+"px";*/
+
+					//解决方式二:
+					//这样写是解决滚动条所属元素的兼容性问题
+					//通过给div加上滚动条的滚动距离来解决滚动条移动而div不跟鼠标的问题
+					var st=document.body.scrollTop||document.documentElement.scrollTop;
+					var sl=document.body.scrollLeft||document.documentElement.scrollLeft;
+
+					var clientX = event.clientX;
+					var clientY = event.clientY;
+
+					box1.style.left=clientX +sl +"px";
+					box1.style.top=clientY+ st+"px";
+				}
+
+
+
+
+
+
+			}
+
+
+
+		</script>
+		
+
+	</head>
+	<body style="height: 1000px;width: 2000px;">
+		<div id="box1"></div>
+	</body>
+</html>

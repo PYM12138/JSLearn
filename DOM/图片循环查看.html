@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图片</title>
+    <link rel="stylesheet" type="text/css" href="style/css.css" />
+    <script>
+        window.onload=function () {
+            var prev = document.getElementById("prev");
+            var next = document.getElementById("next");
+            //首先的有一个数组保存所有图片路径
+            var arrayImg=["img/1.jpg","img/2.jpg","img/3.jpg","img/4.jpg","img/5.jpg",];
+
+            //定义一个索引获取数组元素
+            var index=0;
+            var p = document.getElementById("pText");
+            p.innerHTML="总共"+arrayImg.length+"张照片，当前第"+(index+1)+"张";
+
+            prev.onclick=function () {//上一张
+                index--;
+                if (index<0){//第一张在往上一张就是最后一张
+                    index=arrayImg.length-1;
+                }
+                //获取img标签
+                var img = document.getElementsByTagName("img")[0];
+
+
+               /* var img1 = document.querySelector("img");
+              // 获取属性节点的方式
+               var attributes = img1.attributes;
+               alert(attributes[0].value);*/
+
+
+
+                //对img.src进行操作
+                img.src=arrayImg[index];
+
+
+                //每次点击之后都会更新p标签文字信息
+                p.innerHTML="总共"+arrayImg.length+"张照片，当前第"+(index+1)+"张";
+            }
+            next.onclick=function () {//下一张
+                index++;
+                if (index>arrayImg.length-1){//最后一张在往下就是第一张
+                    index=0;
+                }
+                //获取img标签
+                var img = document.getElementsByTagName("img")[0];
+                //对img.src进行操作
+                img.src=arrayImg[index];
+                //每次点击之后都会更新p标签文字信息
+                p.innerHTML="总共"+arrayImg.length+"张照片，当前第"+(index+1)+"张";
+
+            }
+
+
+
+
+
+
+        }
+
+    </script>
+
+</head>
+<body>
+<p id="pText">我是字</p>
+<img src="img/1.jpg" alt="冰棍">
+
+<button id="prev">上一张</button>
+<button id="next">下一张</button>
+</body>
+</html>
