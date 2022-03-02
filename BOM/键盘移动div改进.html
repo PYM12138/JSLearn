@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#box1{
+				width: 100px;
+				height: 100px;
+				background-color: red;
+				position: absolute;
+			}
+			
+			
+		</style>
+		
+		<script type="text/javascript">
+			/*
+			* 目前面临一个问题：
+			* 	连续按键会首先卡顿一下。接下来要通过定时器来改进一下这个卡顿效果
+			*
+			* */
+			//设置一个外部dir来接收keyCode
+			var dir=0;
+			//定义一个变量，来表示移动的速度
+			var speed = 10;
+
+
+			window.onload = function(){
+				setInterval(function () {
+					/*
+					 * 37 左
+					 * 38 上
+					 * 39 右
+					 * 40 下
+					 */
+					switch(dir){
+						case 37:
+							//alert("向左"); left值减小
+							box1.style.left = box1.offsetLeft - speed + "px";
+							break;
+						case 39:
+							//alert("向右");
+							box1.style.left = box1.offsetLeft + speed + "px";
+							break;
+						case 38:
+							//alert("向上");
+							box1.style.top = box1.offsetTop - speed + "px";
+							break;
+						case 40:
+							//alert("向下");
+							box1.style.top = box1.offsetTop + speed + "px";
+							break;
+					}
+				},30)
+
+				
+				//为document绑定一个按键按下的事件
+				document.onkeydown = function(event){
+					event = event || window.event;
+					
+					//当用户按了ctrl以后，速度加快
+					if(event.ctrlKey){
+						speed = 500;
+					}else{
+						speed=10;
+					}
+					dir=event.keyCode;
+
+				};
+				document.onkeyup=function () {
+					dir=0;
+				};
+				
+			};
+			
+			
+		</script>
+	</head>
+	<body>
+		<div id="box1"></div>
+	</body>
+</html>

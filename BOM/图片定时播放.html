@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        window.onload=function () {
+            //获取img对象
+            var img = document.getElementById("imgList");
+            //获取Img存放路径(手动获取)
+            var imgPath=["img/1.jpg","img/2.jpg","img/3.jpg","img/4.jpg","img/5.jpg"];
+            //索引
+            var index= 0;
+            var timer;
+
+
+            //点击开始则开始循环
+            var start = document.getElementById("btn1");
+            start.onclick=function () {
+                //如果一直连续点击开始则会开启多个定时器，让速度变得很快
+                //所以每次开启定时器之前先关闭上一个定时器
+                clearInterval(timer);
+
+
+                //通过定时器去循环图片
+                    timer=setInterval(function () {
+                    index++;
+                    //在结束时，回归第一张
+                    if (index>=imgPath.length){
+                        index=0;
+                    }
+                    img.src=imgPath[index];
+
+
+                },1000);
+            }
+
+            //点击结束则停止当前图片
+            var end = document.getElementById("btn2");
+            end.onclick=function () {
+                //这个参数不管是什么值都行，填入正确的值则会执行，不正确的则不做任何操作
+                clearInterval(timer);
+            }
+
+        }
+
+    </script>
+</head>
+<body>
+<img src="img/1.jpg" id="imgList" >
+<br><br/>
+<button id="btn1">开始</button>
+<button id="btn2">结束</button>
+</body>
+</html>

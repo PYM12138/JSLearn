@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>地址栏对象</title>
+<script>
+    /*
+    * 地址栏对象更多的是用于操作地址，具体获取的数据用于服务后端的
+    * 比如截取?之后的数据、截取#之后的数据、截取端口号等等功能
+    * 这里只介绍location的三个方法
+    * */
+    window.onload=function () {
+        var btn = document.getElementById("btn");
+        btn.onclick=function () {
+        //首先location地址值是能直接获取和更改的
+            //alert(location);
+            //location="http://www.baidu.com";
+
+            /*
+            * assign();
+            * 跳转到指定的页面，并且可以回退到上一页面，也叫生成历史记录
+            * */
+            //location.assign("http://www.baidu.com");
+
+            /*
+            *reload();
+            * 相当于f5刷新（ctrl+f5强制刷新）
+            * 如果传入一个true，则为强制刷新并且清空缓存
+            *
+            * */
+            location.reload();
+            /*
+            *replace();
+            * 替换当前页面，不能回退，没有历史记录
+            *
+            * */
+
+
+        }
+    }
+
+</script>
+
+</head>
+<body>
+<h1>欢迎来到location</h1>
+<button id="btn">点击可能会跳转哦~</button>
+
+
+</body>
+</html>

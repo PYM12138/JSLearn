@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        /*清空页面的样式，直接让元素贴边*/
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #box1 {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            background-color: red;
+
+        }
+        #box2 {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            background-color: yellow;
+            top: 200px;
+
+        }
+
+    </style>
+    <script>
+        window.onload = function () {
+            var timer;
+            var btn = document.getElementById("btn");
+            var box1 = document.getElementById("box1");
+            var box2 = document.getElementById("box2");
+            var btn1=document.getElementById("btn1")
+            var btn2 = document.getElementById("btn2");
+
+            btn.onclick = function () {
+               /* //防止重复点击
+                clearInterval(timer);
+               timer= setInterval(function () {
+                    //1.获取最开始的box1.left值，在这个的基础加值。
+                    var leftValue = getComputedStyle(box1, null).left
+                    var oldValue = parseInt(leftValue);
+                    //给旧值加10
+                    oldValue += 10;
+                    //2.当值到800则停止
+                    if (oldValue >= 800) {
+                        clearInterval(timer);
+                        oldValue=800;
+                    }
+                    //重新赋值给Left
+                    box1.style.left = oldValue + "px";
+                }, 30);*/
+                moveDiv(box1,10,800,"left");
+            };
+            btn1.onclick=function () {
+                moveDiv(box1,19,0,"left");
+            }
+            btn2.onclick=function () {
+                moveDiv(box2,10,800,"width",function (){
+                    moveDiv(box2,10,200,"height",function (){
+                        moveDiv(box2,10,100,"top",function (){
+                            moveDiv(box2,10,20,"width",function (){
+
+                            });
+                        });
+                    });
+                });
+            }
+
+        };
+        //函数提取
+        /*
+        * 参数:
+        *   obj:被移动的对象
+        *   speed:移动的速度
+        *   target:移动距离目标
+        *   attr:随心所遇，想要垂直就垂直，想要水平就水平
+        *   callback:最后结尾处来一个回调函数，画龙点睛，创造无限可能。
+        *   最后的最后，可以把这个函数写到外部js文件中。引用文件然后调用函数名即可使用。
+        * */
+
+
+        // var timer; 不能用全局变量，不然动画之间会互相干扰
+        function moveDiv(obj,speed,target,attr,callback){
+            //防止重复点击
+            clearInterval(obj.timer);
+            //1.获取最开始的box1.left值，在这个的基础加值。
+
+            var current = parseInt(getComputedStyle(obj, null)[attr]);
+            /*
+             * 当前Left和目标left对比
+             * target为800，current 为0 speed则需要一个正数，递增往右
+             * target为0，current 为100 speed 则需要一个负数，递减往左
+             * */
+
+            if (current>target){
+                //这个表达式加不加=，都行。只判断速度的正负。到达target下面会再次判断
+                //在这里判断speed是正数还是负数
+                speed=-speed;
+            }
+            obj.timer= setInterval(function () {
+                var leftValue = getComputedStyle(obj, null)[attr]
+                var oldValue = parseInt(leftValue);
+                //给新值加speed
+                var newValue=oldValue + speed;
+                /*
+                * 分情况讨论:
+                * 1.speed 为正数，整体向右移动，newValue是否小于target,否则永远不能到达
+                * 2.speed 为负数,整体向左移动，newValue是否大于target
+                * */
+                //负数、正数
+                //target 如果为0，那么这个条件式最后才会成立。newValue是依次递减的
+                if ((speed<0&&newValue<target) || (speed>0&&newValue>target)) {
+                    newValue=target;
+                }
+                //重新赋值给Left
+                obj.style[attr] = newValue + "px";
+
+                //当元素移动到0px时，使其停止执行动画
+                if(newValue === target){
+                    //达到目标，关闭定时器
+                    clearInterval(obj.timer);
+                    //有回调函数就用没有就拉倒
+                    callback && callback();
+                }
+
+            }, 30);
+
+        }
+
+
+
+
+
+
+
+    </script>
+</head>
+<body>
+<button id="btn">点击开始向右移动方块box1</button>
+<button id="btn1">点击开始向左移动方块box1</button>
+<button id="btn2">测试最终版</button>
+
+<br/>
+<br/>
+<div id="box1"></div>
+<div id="box2"></div>
+<div style="width: 0; height: 1000px; border-left:1px black solid; position: absolute; left: 800px;top:0;"></div>
+</body>
+</html>

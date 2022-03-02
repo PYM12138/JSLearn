@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>定时器</title>
+    <script>
+        /*
+        * 定时器：
+        *   开始定时器：
+        *        setInterval();
+        *        需要两个参数:
+        *               - 回调函数，到了执行时间，就执行函数
+        *               - 毫秒数，指定时间
+        *        返回值是一个数字：用于区分是哪个定时器
+        *
+        *
+        *   结束定时器:
+        *        clearInterval();
+        *           需要一个参数:传入定时器的名字
+        *
+        *
+        * */
+        window.onload=function () {
+            var h1Text = document.getElementById("text");
+            var num=0;
+           /* for (var i=0; i<20;i++){
+                h1Text.innerHTML=num++;
+            }*/
+           var timer= setInterval(function () {
+                    h1Text.innerHTML=num++;
+                    if (num===11){
+                        clearInterval(timer);
+                    }
+            },1000);
+
+
+        }
+
+    </script>
+</head>
+<body>
+<h1 id="text"></h1>
+</body>
+</html>
