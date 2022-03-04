@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			
+			/*
+			 * 设置outer的样式
+			 */
+			#outer{
+				/*设置宽和高*/
+				width: 520px;
+				height: 333px;
+				/*居中*/
+				margin: 50px auto;
+				/*设置背景颜色*/
+				background-color: greenyellow;
+				/*设置padding*/
+				padding: 10px 0;
+				/*开启相对定位*/
+				position: relative;
+				/*裁剪溢出的内容*/
+				overflow: hidden;
+			}
+			
+			/*设置imgList*/
+			#imgList{
+				/*去除项目符号*/
+				list-style: none;
+				/*设置ul的宽度*/
+				/*width: 2600px;*/
+				/*开启绝对定位*/
+				position: absolute;
+				/*设置偏移量*/
+				/*
+				 * 每向左移动520px，就会显示到下一张图片
+				 */
+				left: 0;
+			}
+			
+			/*设置图片中的li*/
+			#imgList li{
+				/*设置浮动*/
+				float: left;
+				/*设置左右外边距*/
+				margin: 0 10px;
+			}
+			
+			/*设置导航按钮*/
+			#navDiv{
+				/*开启绝对定位*/
+				position: absolute;
+				/*设置位置*/
+				bottom: 15px;
+				/*设置left值
+				 	outer宽度  520
+				 	navDiv宽度 25*5 = 125
+				 		520 - 125 = 395/2 = 197.5
+				 * */
+				/*left: 197px;*/
+			}
+			
+			#navDiv a{
+				/*设置超链接浮动*/
+				float: left;
+				/*设置超链接的宽和高*/
+				width: 15px;
+				height: 15px;
+				/*设置背景颜色*/
+				background-color: red;
+				/*设置左右外边距*/
+				margin: 0 5px;
+				/*设置透明*/
+				opacity: 0.5;
+				/*兼容IE8透明*/
+				filter: alpha(opacity=50);
+			}
+			
+			/*设置鼠标移入的效果*/
+			#navDiv a:hover{
+				background-color: black;
+			}
+		</style>
+		<script src="js/tools.js"></script>
+
+		<script type="text/javascript">
+			window.onload = function(){
+				//获取imgList
+				var imgList = document.getElementById("imgList");
+				//获取页面中所有的img标签
+				var imgArr = document.getElementsByTagName("img");
+				//设置imgList的宽度
+				imgList.style.width = 520*imgArr.length+"px";
+				
+				
+				/*设置导航按钮居中*/
+				//获取navDiv
+				var navDiv = document.getElementById("navDiv");
+				//获取outer
+				var outer = document.getElementById("outer");
+				//让图片下面的导航条永远居中
+				//设置navDiv的left值
+				navDiv.style.left = (outer.offsetWidth - navDiv.offsetWidth)/2 + "px";
+				
+				//默认显示图片的索引
+				var index = 0;
+				//获取所有的a
+				var allA = document.getElementsByTagName("a");
+				//设置默认选中的效果
+				allA[index].style.backgroundColor = "black";
+
+
+				//给每个A标签绑定点击事件
+				for (var i = 0; i < allA.length; i++) {
+					/*
+					* 这里有一个老问题：给所有a标签绑定了事件之后找不到当前点击的是那个a标签了
+					* （问题出现的原因：for循环一开始执行完成了，点击事件只有点击之后才触发，所以永远都不知道到底是哪个事件被点击了）
+					* 解决方法是：在绑定之前先用一个自定义属性来来保存即将定义的a标签点击事件，
+					* 然后在用this.自定义属性的方式来找到当前绑定的标签
+					* */
+					allA[i].num=i;
+					allA[i].onclick=function () {
+						//点击时，关闭自动轮播
+						clearInterval(timerAuto);
+
+						//成功获取当前的绑定目标事件
+						//alert(this.num);
+						index=this.num;
+						//点击a标签之后设置Left就可以移动图片了
+						//imgList.style.left=-520*index+"px";
+						setAbgc();
+						moveDiv(imgList,20,-520*index,"left",function () {
+							//执行完当前动画，再次开启自动轮播
+							autoChange();
+						});
+
+					};
+				}
+				autoChange();
+
+
+				function setAbgc(){
+
+					if (index>=imgArr.length-1){
+						index=0;
+						//到达最大索引值之后，直接设置Left为0，配合最后一张图片，完美欺骗眼睛，无缝衔接图片
+						imgList.style.left=0;
+					}
+
+
+					//给所有A标签先全部默认红色
+					for (var i = 0; i < allA.length; i++) {
+						//这里不能设置红色，会覆盖掉外部定义的css
+						//空字符串则代表用外部的css
+						allA[i].style.backgroundColor="";
+					}
+					//被选中的a则为黑色，这里是直接设置内联样式的所以优先级比较高
+					allA[index].style.backgroundColor="black";
+
+				}
+				//获取自动轮播的定时器
+				var timerAuto;
+
+				//自动开启轮播图函数
+				function autoChange(){
+					//定义一个定时器
+					timerAuto=setInterval(function () {
+						//索引决定图片的播放
+						index++;
+
+						//index%=imgArr.length;
+
+
+						moveDiv(imgList,20,-520*index,"left",function () {
+							setAbgc();
+						});
+						/*
+						* 现在面临两个问题：
+						* 导航条不会自动切换
+						* 图片需要切换成第一张
+						*
+						* 还有一个问题是:点击事件应该优先于自动轮播
+						*
+						* */
+
+					},3000);
+
+
+
+
+				}
+
+			};
+			
+		</script>
+	</head>
+	<body>
+		<!-- 创建一个外部的div，来作为大的容器 -->
+		<div id="outer">
+			<!-- 创建一个ul，用于放置图片 -->
+			<ul id="imgList">
+				<li><img src="img/1.jpg"/></li>
+				<li><img src="img/2.jpg"/></li>
+				<li><img src="img/3.jpg"/></li>
+				<li><img src="img/4.jpg"/></li>
+				<li><img src="img/5.jpg"/></li>
+				<li><img src="img/1.jpg"/></li>
+			</ul>
+			<!--创建导航按钮-->
+			<div id="navDiv">
+				<a href="javascript:;"></a>
+				<a href="javascript:;"></a>
+				<a href="javascript:;"></a>
+				<a href="javascript:;"></a>
+				<a href="javascript:;"></a>
+			</div>
+		</div>
+	</body>
+</html>
