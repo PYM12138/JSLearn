@@ -47,3 +47,42 @@ function moveDiv(obj,speed,target,attr,callback){
     }, 30);
 
 }
+
+/*
+       *
+       * 定义一个增加、删除、更改className的函数
+       * */
+function addClass(obj,cn) {
+    //这里采用class同时存在的方式（样式可以互相用，只更改需要改变的地方），可以同时存在但不能有重复的存在
+    if(!hasClass(obj,cn)){
+        obj.className+=" "+cn;
+    }
+
+}
+
+function hasClass(obj,cn) {
+    //用正则表达式找到重复的
+    var regExp = new RegExp("\\b"+cn+"\\b");
+    //返回过去
+    return regExp.test(obj.className)
+}
+
+function removeClass(obj,cn) {
+    //删除classname需配合hasClass()使用
+    //用正则表达式找到重复的
+    var regExp = new RegExp("\\b"+cn+"\\b");
+
+    //把重复的替换为空串
+    obj.className=obj.className.replace(regExp," ");
+}
+
+//在写一个升级版的，如果有则删除，没有就添加，更加智能。
+//toggle 切换，转换
+function toggleClass(obj,cn){
+    if (hasClass(obj,cn)){
+        //如果已经存在重复的类名了，先删除
+        removeClass(obj,cn);
+    }else{
+        addClass(obj,cn);
+    }
+}

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .b1{
+            height: 200px;
+            width: 200px;
+            background-color: red;
+        }
+        .b2{
+
+            width: auto;
+            background-color: yellow;
+        }
+
+
+    </style>
+    <script>
+        /*
+        * 问题:每次使用js去定义css，浏览器就会刷新一次。（每次使用style，浏览器就会刷新一次。严重拖累性能）
+        * 解决：通过去定义一个额外的css，在通过js.className来更改样式
+        * */
+        window.onload=function () {
+            var btn = document.getElementById("btn");
+            var box = document.getElementById("box");
+            btn.onclick=function () {
+                //只要点击，就会一直触发这个方法
+                toggleClass(box,"b2")
+
+            }
+
+
+
+
+        }
+        /*
+        *
+        * 定义一个增加、删除、更改className的函数
+        * */
+        function addClass(obj,cn) {
+            //这里采用class同时存在的方式（样式可以互相用，只更改需要改变的地方），可以同时存在但不能有重复的存在
+            if(!hasClass(obj,cn)){
+                obj.className+=" "+cn;
+            }
+
+        }
+
+        function hasClass(obj,cn) {
+            //用正则表达式找到重复的
+            var regExp = new RegExp("\\b"+cn+"\\b");
+            //返回过去
+            return regExp.test(obj.className)
+        }
+
+        function removeClass(obj,cn) {
+            //删除classname需配合hasClass()使用
+            //用正则表达式找到重复的
+            var regExp = new RegExp("\\b"+cn+"\\b");
+
+            //把重复的替换为空串
+            obj.className=obj.className.replace(regExp," ");
+        }
+
+        //在写一个升级版的，如果有则删除，没有就添加，更加智能。
+        //toggle 切换，转换
+        function toggleClass(obj,cn){
+            if (hasClass(obj,cn)){
+                //如果已经存在重复的类名了，先删除
+                removeClass(obj,cn);
+            }else{
+                addClass(obj,cn);
+            }
+        }
+
+
+
+
+
+
+
+
+    </script>
+
+
+</head>
+<body>
+<button id="btn">点我改变图形</button>
+<br>
+<br>
+<div id="box" class="b1"></div>
+</body>
+</html>
